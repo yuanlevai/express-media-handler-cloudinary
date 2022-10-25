@@ -82,14 +82,14 @@ async function uploadHandler (req, res) {
 
 // afunction untuk upload multiple files
 async function multipleUploadHandler (req, res) {
-    let urls = [];
+    let url = [];
     for (let i = 0; i < req.files.length; i++) {
-        urls.push(await cloudinaryUpload(req.files[i].path))
+        url.push(await cloudinaryUpload(req.files[i].path))
     }
     res.status(200).json({
         code: "200",
         status: "OK",
-        url: urls
+        url: url
     })
 }
 
@@ -107,7 +107,7 @@ app.get('/uploads/:filename', (req, res) => {
 app.use((err, req, res, next) => {
     res.status(400).json({
         code: "400",
-        status: "Bad Request",
+        status: "BAD_REQUEST",
         message: err.message
     })
 })
